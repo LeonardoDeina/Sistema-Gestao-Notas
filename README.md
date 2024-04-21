@@ -7,7 +7,7 @@ Eric Coutinho Pereira - RA: 231861567-2
 
 Mohannad Majid - RA: 
 
-Leonardo Santos Deina - RA: 
+Leonardo Santos Deina - RA: 23105632-2
 
 ### Tecnologias utilizadas
 
