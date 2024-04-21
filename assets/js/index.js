@@ -22,12 +22,26 @@ function adicionaDadosAluno() {
         return;
     }
 
-    const media1 = (parseFloat(prova1) + parseFloat(aep1) + parseFloat(integrada1)) / 3;
+    const media1 = (parseFloat(prova1) * 0.8) + (parseFloat(aep1) * 0.1) + (parseFloat(integrada1) * 0.1);
     console.log('Media 1', media1);
-    const media2 = (parseFloat(prova2) + parseFloat(aep2) + parseFloat(integrada2)) / 3;
+    const media2 = (parseFloat(prova2) * 0.8) + (parseFloat(aep2) * 0.1) + (parseFloat(integrada2) * 0.1);
     console.log('Media 2', media2);
     const mediaFinal = (media1 + media2) / 2;
     console.log('Media Final', mediaFinal);
+
+    let statusAluno = ""
+
+    if(mediaFinal >= 6) {
+        statusAluno = 'Aprovado';
+    }
+    else if (mediaFinal < 6 && mediaFinal >= 3) {
+        statusAluno = 'Recuperação';
+    }
+    else {
+        statusAluno = 'Reprovado';
+    }
+
+    console.log(statusAluno);
 
     let aluno = {
         id: id,
@@ -42,7 +56,8 @@ function adicionaDadosAluno() {
         aep2: aep2,
         integrada2: integrada2,
         media2: media2,
-        mediaFinal: mediaFinal
+        mediaFinal: mediaFinal,
+        status: statusAluno
     }
 
     alunos.push(aluno);
