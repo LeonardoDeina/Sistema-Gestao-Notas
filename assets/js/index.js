@@ -66,6 +66,15 @@ function adicionaDadosAluno() {
     console.log(alunos);
 }
 
+function limpaCampos(){
+    document.getElementById('formCadastro').reset();
+}
+
+function executaCadastro(){
+    adicionaDadosAluno();
+    limpaCampos();
+}
+
 function verificaNota(atividade) {
     if (atividade > 10 || atividade < 0)
         return false;

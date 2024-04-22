@@ -31,13 +31,13 @@
             </div>
         </div>
     </nav>
-    <div class="container text-center containerBody">
+    <div class="container text-center containerBody" >
         <div class="row">
             <div class="col">
             </div>
             <div class="col">
                 <h1>Cadastrar Aluno</h1>
-                <form type='submit'>
+                <form type='submit' id="formCadastro">
                     <div class="mb-3">
                         <label for="input_nome" class="form-label">Nome do aluno</label>
                         <input type="text" id="input_nome" class="form-control">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <button type="button" class="btn btn-success btn-lg" id="btnCadastrarAluno"
-                        onclick="adicionaDadosAluno()">Cadastrar Aluno</button>
+                        onclick="executaCadastro()">Cadastrar Aluno</button>
                 </form>
             </div>
             <div class="col">
