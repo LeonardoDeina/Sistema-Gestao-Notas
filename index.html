@@ -19,8 +19,14 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
+            <a class="navbar-brand" href="#">Gerenciamento de Notas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="index.html">Formulário</a>
                     </li>
@@ -31,11 +37,11 @@
             </div>
         </div>
     </nav>
-    <div class="container text-center containerBody" >
+    <div class="container text-center containerBody">
         <div class="row">
-            <div class="col">
+            <div class="col-lg-3 col-sm-0">
             </div>
-            <div class="col">
+            <div class="col-lg-6 col-sm-12">
                 <h1>Cadastrar Aluno</h1>
                 <form type='submit' id="formCadastro">
                     <div class="mb-3">
@@ -43,7 +49,7 @@
                         <input type="text" id="input_nome" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="input_ra" class="form-label" >R.A do aluno</label>
+                        <label for="input_ra" class="form-label">R.A do aluno</label>
                         <input type="number" id="input_ra" class="form-control" placeholder="Apenas Números">
                     </div>
                     <div class="mb-3">
@@ -88,7 +94,7 @@
                         onclick="executaCadastro()">Cadastrar Aluno</button>
                 </form>
             </div>
-            <div class="col">
+            <div class="col-lg-3 col-sm-0">
             </div>
         </div>
     </div>
