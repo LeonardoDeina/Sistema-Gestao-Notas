@@ -92,15 +92,45 @@ function adicionaLocalStorage(alunos) {
 }
 
 function recuperaLocalStorage() {
-    let dados = JSON.parse(localStorage.getItem(alunos));
+    let dados = JSON.parse(localStorage.getItem("alunos"));
     return dados;
 }
 
 //Espaço para a função de montar a tabela//
 
-/*function montaTabela(){
+function montaTabela(){
     let dados = recuperaLocalStorage();
     let tabela = document.querySelector('#table tbody');
+    let contador = 1
+    for (contador=1; contador < dados.length; contador++){
+        let item = tabela.insertRow();
+        item.id = "aluno"+ dados[contador].id;
+    
+        if (dados[contador].status=="Recuperação"){
+            item.classList.add("recuperacao")
+        }else if(dados[contador].status=="Reprovado"){
+            item.classList.add("reprovado")
+        }else{
+            item.classList.add("aprovado")
+        }
+        
+        item.innerHTML = //"<td>"+dados[contador].id+"</td>"
+        "<td>"+dados[contador].nome+"</td>"
+        + "<td>"+dados[contador].ra+"</td>"
+        + "<td>"+dados[contador].email+"</td>"
+        + "<td>"+dados[contador].prova1+"</td>"
+        + "<td>"+dados[contador].aep1+"</td>"
+        + "<td>"+dados[contador].integrada1+"</td>"
+        + "<td>"+dados[contador].media1+"</td>"
+        + "<td>"+dados[contador].prova2+"</td>"
+        + "<td>"+dados[contador].aep2+"</td>"
+        + "<td>"+dados[contador].integrada2+"</td>"
+        + "<td>"+dados[contador].media2+"</td>"
+        + "<td>"+dados[contador].mediaFinal+"</td>"
+        + "<td>"+dados[contador].status+"</td>"
+    }
+}
+
+window.onload = function() {montaTabela();}
 
 
-}*/

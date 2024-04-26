@@ -1,5 +1,5 @@
 .tableDiv {
-    padding: 2em;
+    padding: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,9 +17,9 @@ td, th {
     padding: 8px;
 }
 
-tr:nth-child(even) {
+/*tr:nth-child(even) {
     background-color: #dddddd;
-}
+}*/
 
 .aprovado{
     background-color: green;
@@ -27,4 +27,8 @@ tr:nth-child(even) {
 
 .reprovado{
     background-color: red;
+}
+
+.recuperacao{
+    background-color: yellow;
 }
