@@ -89,6 +89,33 @@ function verificaAep(aep) {
     return true;
 }
 
+function manipulaItem(id){
+    alert("Voce esta entrando na função de manipulação e deleção!!!")
+    let escolha = prompt("Escolha uma opção: 1 (EDITA NOME), 2 (EDITA EMAIL), 3 (EDITA RA), 4 (EXCLUI REGISTRO)")
+
+    switch (escolha){
+        case '1':
+            let alteracaoN = prompt("Insira o novo nome:");
+            let textoEscolhidoN = document.getElementById("campoNome"+id)
+            textoEscolhidoN.innerHTML = alteracao
+            break;
+        case '2':
+            let alteracaoM = prompt("Insira o novo email:");
+            let textoEscolhidoM = document.getElementById("campoEmail"+id)
+            textoEscolhidoM.innerHTML = alteracaoM
+            break;
+        case '3':
+            let alteracaoR = prompt("Insira o novo RA:");
+            let textoEscolhidoR = document.getElementById("campoRa"+id)
+            textoEscolhidoR.innerHTML = alteracaoR
+            break;
+        case '4':
+            
+            break;
+    }
+ }
+
+
 function adicionaLocalStorage(alunos) {
     localStorage.setItem('alunos', JSON.stringify(alunos));
     alert('Aluno cadastrado com sucesso.');
@@ -118,21 +145,24 @@ function montaTabela(){
         }
         
         item.innerHTML = //"<td>"+dados[contador].id+"</td>"
-        "<td>"+dados[contador].nome+"</td>"
-        + "<td>"+dados[contador].ra+"</td>"
-        + "<td>"+dados[contador].email+"</td>"
-        + "<td>"+dados[contador].prova1+"</td>"
-        + "<td>"+dados[contador].aep1+"</td>"
-        + "<td>"+dados[contador].integrada1+"</td>"
-        + "<td>"+dados[contador].media1+"</td>"
-        + "<td>"+dados[contador].prova2+"</td>"
-        + "<td>"+dados[contador].aep2+"</td>"
-        + "<td>"+dados[contador].integrada2+"</td>"
-        + "<td>"+dados[contador].media2+"</td>"
-        + "<td>"+dados[contador].mediaFinal+"</td>"
-        + "<td>"+dados[contador].status+"</td>"
+        "<td id='"+"campoNome"+contador+"'>"+dados[contador].nome+"</td>"
+        + "<td id='"+"campoRa"+contador+"'>"+dados[contador].ra+"</td>"
+        + "<td id='"+"campoEmail"+contador+"'>"+dados[contador].email+"</td>"
+        + "<td id='"+"campoProva1"+contador+"'>"+dados[contador].prova1+"</td>"
+        + "<td id='"+"campoAep1"+contador+"'>"+dados[contador].aep1+"</td>"
+        + "<td id='"+"campoIntegrada1"+contador+"'>"+dados[contador].integrada1+"</td>"
+        + "<td id='"+"campoMedia1"+contador+"'>"+dados[contador].media1+"</td>"
+        + "<td id='"+"campoProva2"+contador+"'>"+dados[contador].prova2+"</td>"
+        + "<td id='"+"campoAep2"+contador+"'>"+dados[contador].aep2+"</td>"
+        + "<td id='"+"campoIntegrada2"+contador+"'>"+dados[contador].integrada2+"</td>"
+        + "<td id='"+"campoMedia2"+contador+"'>"+dados[contador].media2+"</td>"
+        + "<td id='"+"campoMediaFinal"+contador+"'>"+dados[contador].mediaFinal+"</td>"
+        + "<td id='"+"campoStatus"+contador+"'>"+dados[contador].status+"</td>"
+        + "<td id='"+dados[contador].id+"'><button onclick='manipulaItem("+dados[contador].id+")'>Editar</button></td>"
     }
 }
+
+
 
 window.onload = function() {montaTabela();}
 
