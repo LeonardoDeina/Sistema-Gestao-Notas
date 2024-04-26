@@ -90,3 +90,17 @@ function adicionaLocalStorage(alunos) {
     localStorage.setItem('alunos', JSON.stringify(alunos));
     alert('Aluno cadastrado com sucesso.');
 }
+
+function recuperaLocalStorage() {
+    let dados = JSON.parse(localStorage.getItem(alunos));
+    return dados;
+}
+
+//Espaço para a função de montar a tabela//
+
+/*function montaTabela(){
+    let dados = recuperaLocalStorage();
+    let tabela = document.querySelector('#table tbody');
+
+
+}*/

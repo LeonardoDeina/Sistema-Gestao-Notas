@@ -20,3 +20,11 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+.aprovado{
+    background-color: green;
+}
+
+.reprovado{
+    background-color: red;
+}
