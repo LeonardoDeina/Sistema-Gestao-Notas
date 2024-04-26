@@ -24,14 +24,14 @@ function adicionaDadosAluno() {
 
     const media1 = (parseFloat(prova1) * 0.8) + (parseFloat(aep1) * 0.1) + (parseFloat(integrada1) * 0.1);
     const media2 = (parseFloat(prova2) * 0.8) + (parseFloat(aep2) * 0.1) + (parseFloat(integrada2) * 0.1);
-    const mediaFinal = (media1 + media2) / 2;
+    const mediaFinal = ((media1 + media2) / 2).toFixed(2);
 
     let statusAluno = ""
     if (mediaFinal > 10 || mediaFinal < 0) {
         alert("Média final inválida, tente novamente.");
         return;
     }
-    else if(mediaFinal >= 6) {
+    else if (mediaFinal >= 6) {
         statusAluno = 'Aprovado';
     }
     else if (mediaFinal < 6 && mediaFinal >= 3) {
@@ -44,17 +44,17 @@ function adicionaDadosAluno() {
     console.log(statusAluno);
 
     let aluno = {
-        id: id,
-        nome: nome.trim(),
-        ra: ra,
-        email: email.trim(),
-        prova1: prova1,
-        aep1: aep1,
-        integrada1: integrada1,
-        media1: media1,
-        prova2: prova2,
-        aep2: aep2,
-        integrada2: integrada2,
+        Id: id,
+        Nome: nome.trim(),
+        Ra: ra,
+        Email: email.trim(),
+        Prova1: prova1,
+        Aep1: aep1,
+        Integrada1: integrada1,
+        Media1: media1,
+        Prova2: prova2,
+        Aep2: aep2,
+        Integrada2: integrada2,
         media2: media2,
         mediaFinal: mediaFinal,
         status: statusAluno
@@ -62,6 +62,7 @@ function adicionaDadosAluno() {
     try {
         alunos.push(aluno);
         adicionaLocalStorage(alunos);
+        alert('Aluno cadastrado com sucesso.');
         console.log(alunos);
     } catch {
         alert("Algo deu errado ao adicionar aluno.")
@@ -69,11 +70,11 @@ function adicionaDadosAluno() {
 
 }
 
-function limpaCampos(){
+function limpaCampos() {
     document.getElementById('formCadastro').reset();
 }
 
-function executaCadastro(){
+function executaCadastro() {
     adicionaDadosAluno();
     limpaCampos();
 }
@@ -89,36 +90,91 @@ function verificaAep(aep) {
     return true;
 }
 
-function manipulaItem(id){
+function manipulaItem(id) {
     alert("Voce esta entrando na função de manipulação e deleção!!!")
-    let escolha = prompt("Escolha uma opção: 1 (EDITA NOME), 2 (EDITA EMAIL), 3 (EDITA RA), 4 (EXCLUI REGISTRO)")
-
-    switch (escolha){
-        case '1':
-            let alteracaoN = prompt("Insira o novo nome:");
-            let textoEscolhidoN = document.getElementById("campoNome"+id)
-            textoEscolhidoN.innerHTML = alteracao
-            break;
-        case '2':
-            let alteracaoM = prompt("Insira o novo email:");
-            let textoEscolhidoM = document.getElementById("campoEmail"+id)
-            textoEscolhidoM.innerHTML = alteracaoM
-            break;
-        case '3':
-            let alteracaoR = prompt("Insira o novo RA:");
-            let textoEscolhidoR = document.getElementById("campoRa"+id)
-            textoEscolhidoR.innerHTML = alteracaoR
-            break;
-        case '4':
-            
-            break;
+    let escolha = prompt("Escolha qual coluna deseja escolher:\nex: Nome, Ra, Prova 1BI, etc");
+    if (!escolha) {
+        alert("Escolha uma coluna.");
+        return;
     }
- }
 
+    const acceptedValues = ['Nome', 'Ra', 'Email', 'Prova 1BI', 'AEP 1BI', 'Integrada 1BI', 'Prova 2BI', 'AEP 2BI', 'Integrada 2BI'];
+
+    if (!acceptedValues.includes(escolha)) {
+        alert('Escolha uma coluna válida.');
+        return;
+    }
+
+    let alunos = localStorage.getItem('alunos');
+    alunos = JSON.parse(alunos);
+    console.log('alunos: ', alunos);
+
+    let aluno = alunos[id];
+    console.log('aluno: ', aluno);
+
+    switch (escolha) {
+        case 'Nome':
+            updateSwitch(`${escolha}`, id, aluno, alunos);
+            break;
+
+        case 'Ra':
+            updateSwitch(`${escolha}`, id, aluno, alunos);
+            break;
+
+        case 'Email':
+            updateSwitch(`${escolha}`, id, aluno, alunos);
+            break;
+
+        case 'Prova 1BI':
+            updateSwitch('Prova1', id, aluno, alunos);
+            break;
+
+        case 'AEP 1BI':
+            updateSwitch('Aep1', id, aluno, alunos);
+            break;
+
+        case 'Integrada 1BI':
+            updateSwitch('Intregrada1', id, aluno, alunos);
+            break;
+
+        case 'Prova 2BI':
+            updateSwitch('Prova2', id, aluno, alunos);
+            break;
+
+        case 'AEP 2BI':
+            updateSwitch('Aep2', id, aluno, alunos);
+            break;
+
+        case 'Integrada 2BI':
+            updateSwitch('Intregrada2', id, aluno, alunos);
+            break;
+
+        default:
+            alert('Escolha uma coluna válida.');
+    }
+}
+
+function updateSwitch(campo, id, aluno, alunos) {
+    let alteracao = prompt(`Insira o novo ${campo}:`);
+    if (!alteracao) {
+        alert('Por favor preencha as informações corretamente');
+        return;
+    }
+
+    textoEscolhido = document.getElementById(`campo${campo}` + id);
+    textoEscolhido.innerHTML = alteracao;
+    text = textoEscolhido.innerText;
+    updateInfo(`${campo}`, text, id, aluno, alunos);
+}
+
+function updateInfo(info, value, id, aluno, alunos) {
+    aluno[`${info}`] = value;
+    alunos[id] = aluno;
+    adicionaLocalStorage(alunos);
+}
 
 function adicionaLocalStorage(alunos) {
     localStorage.setItem('alunos', JSON.stringify(alunos));
-    alert('Aluno cadastrado com sucesso.');
 }
 
 function recuperaLocalStorage() {
@@ -126,44 +182,39 @@ function recuperaLocalStorage() {
     return dados;
 }
 
-//Espaço para a função de montar a tabela//
-
-function montaTabela(){
+function montaTabela() {
     let dados = recuperaLocalStorage();
     let tabela = document.querySelector('#table tbody');
     let contador = 1
-    for (contador=1; contador < dados.length; contador++){
+    for (contador = 1; contador < dados.length; contador++) {
         let item = tabela.insertRow();
-        item.id = "aluno"+ dados[contador].id;
-    
-        if (dados[contador].status=="Recuperação"){
+        item.id = "aluno" + dados[contador].id;
+
+        if (dados[contador].status == "Recuperação") {
             item.classList.add("recuperacao")
-        }else if(dados[contador].status=="Reprovado"){
+        } else if (dados[contador].status == "Reprovado") {
             item.classList.add("reprovado")
-        }else{
+        } else {
             item.classList.add("aprovado")
         }
-        
+
         item.innerHTML = //"<td>"+dados[contador].id+"</td>"
-        "<td id='"+"campoNome"+contador+"'>"+dados[contador].nome+"</td>"
-        + "<td id='"+"campoRa"+contador+"'>"+dados[contador].ra+"</td>"
-        + "<td id='"+"campoEmail"+contador+"'>"+dados[contador].email+"</td>"
-        + "<td id='"+"campoProva1"+contador+"'>"+dados[contador].prova1+"</td>"
-        + "<td id='"+"campoAep1"+contador+"'>"+dados[contador].aep1+"</td>"
-        + "<td id='"+"campoIntegrada1"+contador+"'>"+dados[contador].integrada1+"</td>"
-        + "<td id='"+"campoMedia1"+contador+"'>"+dados[contador].media1+"</td>"
-        + "<td id='"+"campoProva2"+contador+"'>"+dados[contador].prova2+"</td>"
-        + "<td id='"+"campoAep2"+contador+"'>"+dados[contador].aep2+"</td>"
-        + "<td id='"+"campoIntegrada2"+contador+"'>"+dados[contador].integrada2+"</td>"
-        + "<td id='"+"campoMedia2"+contador+"'>"+dados[contador].media2+"</td>"
-        + "<td id='"+"campoMediaFinal"+contador+"'>"+dados[contador].mediaFinal+"</td>"
-        + "<td id='"+"campoStatus"+contador+"'>"+dados[contador].status+"</td>"
-        + "<td id='"+dados[contador].id+"'><button onclick='manipulaItem("+dados[contador].id+")'>Editar</button></td>"
+            "<td id='" + "campoNome" + contador + "'>" + dados[contador].Nome + "</td>"
+            + "<td id='" + "campoRa" + contador + "'>" + dados[contador].Ra + "</td>"
+            + "<td id='" + "campoEmail" + contador + "'>" + dados[contador].Email + "</td>"
+            + "<td id='" + "campoProva1" + contador + "'>" + dados[contador].Prova1 + "</td>"
+            + "<td id='" + "campoAep1" + contador + "'>" + dados[contador].Aep1 + "</td>"
+            + "<td id='" + "campoIntegrada1" + contador + "'>" + dados[contador].Integrada1 + "</td>"
+            + "<td id='" + "campoMedia1" + contador + "'>" + dados[contador].Media1 + "</td>"
+            + "<td id='" + "campoProva2" + contador + "'>" + dados[contador].Prova2 + "</td>"
+            + "<td id='" + "campoAep2" + contador + "'>" + dados[contador].Aep2 + "</td>"
+            + "<td id='" + "campoIntegrada2" + contador + "'>" + dados[contador].Integrada2 + "</td>"
+            + "<td id='" + "campoMedia2" + contador + "'>" + dados[contador].media2 + "</td>"
+            + "<td id='" + "campoMediaFinal" + contador + "'>" + dados[contador].mediaFinal + "</td>"
+            + "<td id='" + "campoStatus" + contador + "'>" + dados[contador].status + "</td>"
+            + "<td id='" + dados[contador].id + "'><button onclick='manipulaItem(" + dados[contador].Id + ")'>Editar</button></td>"
     }
 }
 
-
-
-window.onload = function() {montaTabela();}
-
+window.onload = function () { montaTabela(); }
 
