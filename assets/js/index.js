@@ -22,8 +22,8 @@ function adicionaDadosAluno() {
         return;
     }
 
-    const media1 = (parseFloat(prova1) * 0.8) + (parseFloat(aep1) * 0.1) + (parseFloat(integrada1) * 0.1);
-    const media2 = (parseFloat(prova2) * 0.8) + (parseFloat(aep2) * 0.1) + (parseFloat(integrada2) * 0.1);
+    const media1 = (parseFloat(prova1)) + (parseFloat(aep1)) + (parseFloat(integrada1));
+    const media2 = (parseFloat(prova2)) + (parseFloat(aep2)) + (parseFloat(integrada2));
     const mediaFinal = (media1 + media2) / 2;
 
     let statusAluno = ""
