@@ -28,9 +28,9 @@ function adicionaDadosAluno() {
         return;
     }
 
-    const media1 = (parseFloat(prova1) * 0.8) + (parseFloat(aep1) * 0.1) + (parseFloat(integrada1) * 0.1).toFixed(2);
-    const media2 = (parseFloat(prova2) * 0.8) + (parseFloat(aep2) * 0.1) + (parseFloat(integrada2) * 0.1).toFixed(2);
-    const mediaFinal = ((media1 + media2) / 2);
+    const media1 = ((parseFloat(prova1) * 0.8) + (parseFloat(aep1) * 0.1) + (parseFloat(integrada1) * 0.1)).toFixed(2);
+    const media2 = ((parseFloat(prova2) * 0.8) + (parseFloat(aep2) * 0.1) + (parseFloat(integrada2) * 0.1)).toFixed(2);
+    const mediaFinal = ((parseFloat(media1) + parseFloat(media2)) / 2);
 
     let statusAluno = ""
     if (mediaFinal > 10 || mediaFinal < 0) {
