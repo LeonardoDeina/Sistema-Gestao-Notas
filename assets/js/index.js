@@ -1,7 +1,13 @@
-let alunos = [{}];
+let alunos = [];
 
 function adicionaDadosAluno() {
-    const id = alunos.length;
+    var id = 0;
+
+    if (!localStorage.getItem('alunos'))
+        id = 0;
+    else
+        id = JSON.parse(localStorage.getItem('alunos')).length;
+
     const nome = document.getElementById('input_nome').value;
     const ra = document.getElementById('input_ra').value;
     const email = document.getElementById('input_email').value;
@@ -22,9 +28,9 @@ function adicionaDadosAluno() {
         return;
     }
 
-    const media1 = (parseFloat(prova1) * 0.8) + (parseFloat(aep1) * 0.1) + (parseFloat(integrada1) * 0.1);
-    const media2 = (parseFloat(prova2) * 0.8) + (parseFloat(aep2) * 0.1) + (parseFloat(integrada2) * 0.1);
-    const mediaFinal = ((media1 + media2) / 2).toFixed(2);
+    const media1 = (parseFloat(prova1) * 0.8) + (parseFloat(aep1) * 0.1) + (parseFloat(integrada1) * 0.1).toFixed(2);
+    const media2 = (parseFloat(prova2) * 0.8) + (parseFloat(aep2) * 0.1) + (parseFloat(integrada2) * 0.1).toFixed(2);
+    const mediaFinal = ((media1 + media2) / 2);
 
     let statusAluno = ""
     if (mediaFinal > 10 || mediaFinal < 0) {
@@ -40,8 +46,6 @@ function adicionaDadosAluno() {
     else {
         statusAluno = 'Reprovado';
     }
-
-    console.log(statusAluno);
 
     let aluno = {
         Id: id,
@@ -60,14 +64,18 @@ function adicionaDadosAluno() {
         status: statusAluno
     }
     try {
-        alunos.push(aluno);
-        adicionaLocalStorage(alunos);
-        alert('Aluno cadastrado com sucesso.');
-        console.log(alunos);
-    } catch {
-        alert("Algo deu errado ao adicionar aluno.")
-    }
 
+        let alunosLocalStorage = JSON.parse(localStorage.getItem('alunos')) || [];
+
+        alunosLocalStorage.push(aluno);
+
+        localStorage.setItem('alunos', JSON.stringify(alunosLocalStorage));
+
+        alert('Aluno cadastrado com sucesso.');
+
+    } catch {
+        alert("Algo deu errado ao adicionar aluno.");
+    }
 }
 
 function limpaCampos() {
@@ -107,10 +115,8 @@ function manipulaItem(id) {
 
     let alunos = localStorage.getItem('alunos');
     alunos = JSON.parse(alunos);
-    console.log('alunos: ', alunos);
 
     let aluno = alunos[id];
-    console.log('aluno: ', aluno);
 
     switch (escolha) {
         case 'Nome':
@@ -185,8 +191,8 @@ function recuperaLocalStorage() {
 function montaTabela() {
     let dados = recuperaLocalStorage();
     let tabela = document.querySelector('#table tbody');
-    let contador = 1
-    for (contador = 1; contador < dados.length; contador++) {
+    let contador = 0
+    for (contador = 0; contador < dados.length; contador++) {
         let item = tabela.insertRow();
         item.id = "aluno" + dados[contador].id;
 
@@ -198,7 +204,7 @@ function montaTabela() {
             item.classList.add("aprovado")
         }
 
-        item.innerHTML = //"<td>"+dados[contador].id+"</td>"
+        item.innerHTML =
             "<td id='" + "campoNome" + contador + "'>" + dados[contador].Nome + "</td>"
             + "<td id='" + "campoRa" + contador + "'>" + dados[contador].Ra + "</td>"
             + "<td id='" + "campoEmail" + contador + "'>" + dados[contador].Email + "</td>"
@@ -217,4 +223,3 @@ function montaTabela() {
 }
 
 window.onload = function () { montaTabela(); }
-
