@@ -17,21 +17,21 @@ function adicionaDadosAluno() {
         return;
     }
 
-    if (!verificaNota(prova1) || !verificaNota(aep1) || !verificaNota(integrada1) || !verificaNota(prova2) || !verificaNota(aep2) || !verificaNota(integrada2)) {
-        alert('Não é possível adicionar notas maiores que 10 ou menores que 0');
+    if (!verificaProva(prova1) || !verificaAep(aep1) || !verificaAep(integrada1) || !verificaProva(prova2) || !verificaAep(aep2) || !verificaAep(integrada2)) {
+        alert('As notas inseridas extrapolam os limites de nota.');
         return;
     }
 
     const media1 = (parseFloat(prova1) * 0.8) + (parseFloat(aep1) * 0.1) + (parseFloat(integrada1) * 0.1);
-    console.log('Media 1', media1);
     const media2 = (parseFloat(prova2) * 0.8) + (parseFloat(aep2) * 0.1) + (parseFloat(integrada2) * 0.1);
-    console.log('Media 2', media2);
     const mediaFinal = (media1 + media2) / 2;
-    console.log('Media Final', mediaFinal);
 
     let statusAluno = ""
-
-    if(mediaFinal >= 6) {
+    if (mediaFinal > 10 || mediaFinal < 0) {
+        alert("Média final inválida, tente novamente.");
+        return;
+    }
+    else if(mediaFinal >= 6) {
         statusAluno = 'Aprovado';
     }
     else if (mediaFinal < 6 && mediaFinal >= 3) {
@@ -75,8 +75,13 @@ function executaCadastro(){
     limpaCampos();
 }
 
-function verificaNota(atividade) {
-    if (atividade > 10 || atividade < 0)
+function verificaProva(prova) {
+    if (prova > 8 || prova < 0)
+        return false;
+    return true;
+}
+function verificaAep(aep) {
+    if (aep > 1 || aep < 0)
         return false;
     return true;
 }
