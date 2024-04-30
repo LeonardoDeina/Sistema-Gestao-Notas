@@ -100,13 +100,14 @@ function verificaAep(aep) {
 
 function manipulaItem(id) {
     alert("Voce esta entrando na função de manipulação e deleção!!!")
-    let escolha = prompt("Escolha qual coluna deseja escolher:\nex: Nome, Ra, Prova 1BI, etc");
+    let escolhaM = prompt("Escolha qual coluna deseja escolher:\nex: Nome, Ra, Prova 1BI, etc");
+	let escolha = escolhaM.toUpperCase();
     if (!escolha) {
         alert("Escolha uma coluna.");
         return;
     }
 
-    const acceptedValues = ['Nome', 'Ra', 'Email', 'Prova 1BI', 'AEP 1BI', 'Integrada 1BI', 'Prova 2BI', 'AEP 2BI', 'Integrada 2BI'];
+    const acceptedValues = ['NOME', 'RA', 'EMAIL', 'PROVA 1BI', 'AEP 1BI', 'INTEGRADA 1BI', 'PROVA 2BI', 'AEP 2BI', 'INTEGRADA 2BI'];
 
     if (!acceptedValues.includes(escolha)) {
         alert('Escolha uma coluna válida.');
@@ -119,19 +120,19 @@ function manipulaItem(id) {
     let aluno = alunos[id];
 
     switch (escolha) {
-        case 'Nome':
-            updateSwitch(`${escolha}`, id, aluno, alunos);
+        case 'NOME':
+            updateSwitch(`Nome`, id, aluno, alunos);
             break;
 
-        case 'Ra':
-            updateSwitch(`${escolha}`, id, aluno, alunos);
+        case 'RA':
+            updateSwitch(`Ra`, id, aluno, alunos);
             break;
 
-        case 'Email':
-            updateSwitch(`${escolha}`, id, aluno, alunos);
+        case 'EMAIL':
+            updateSwitch(`Email`, id, aluno, alunos);
             break;
 
-        case 'Prova 1BI':
+        case 'PROVA 1BI':
             updateSwitch('Prova1', id, aluno, alunos);
             break;
 
@@ -139,11 +140,11 @@ function manipulaItem(id) {
             updateSwitch('Aep1', id, aluno, alunos);
             break;
 
-        case 'Integrada 1BI':
+        case 'INTEGRADA 1BI':
             updateSwitch('Intregrada1', id, aluno, alunos);
             break;
 
-        case 'Prova 2BI':
+        case 'PROVA 2BI':
             updateSwitch('Prova2', id, aluno, alunos);
             break;
 
@@ -151,7 +152,7 @@ function manipulaItem(id) {
             updateSwitch('Aep2', id, aluno, alunos);
             break;
 
-        case 'Integrada 2BI':
+        case 'INTEGRADA 2BI':
             updateSwitch('Intregrada2', id, aluno, alunos);
             break;
 

@@ -32,3 +32,15 @@ td, th {
 .recuperacao{
     background-color: yellow;
 }
+
+button{
+	border:none;
+	border-radius:10px;
+	text-decoration:none;
+	background-color:white;
+	cursor:pointer;
+}
+
+button:hover{
+	background-color:gray;
+}
